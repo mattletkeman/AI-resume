@@ -1,27 +1,37 @@
 import React from 'react';
 
 export default function Toolbar({ resumeData, setResumeData }) {
-  return (
-    <div className="flex gap-4 mb-4">
-      <select
-        value={resumeData.font}
-        onChange={(e) => setResumeData({ ...resumeData, font: e.target.value })}
-        className="p-2 border"
-      >
-        <option value="sans-serif">Sans Serif</option>
-        <option value="serif">Serif</option>
-        <option value="mono">Monospace</option>
-      </select>
+  const handleChange = (key, value) => {
+    setResumeData({ ...resumeData, [key]: value });
+  };
 
-      <select
-        value={resumeData.border}
-        onChange={(e) => setResumeData({ ...resumeData, border: e.target.value })}
-        className="p-2 border"
-      >
-        <option value="none">No Border</option>
-        <option value="border">Border</option>
-        <option value="border-2">Thick Border</option>
-      </select>
+  return (
+    <div className="flex items-center gap-4 mb-4">
+      <div>
+        <label className="block text-sm font-medium mb-1">Font</label>
+        <select
+          value={resumeData.font}
+          onChange={(e) => handleChange('font', e.target.value)}
+          className="border p-1 rounded"
+        >
+          <option value="sans-serif">Sans</option>
+          <option value="serif">Serif</option>
+          <option value="mono">Mono</option>
+        </select>
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium mb-1">Border</label>
+        <select
+          value={resumeData.border}
+          onChange={(e) => handleChange('border', e.target.value)}
+          className="border p-1 rounded"
+        >
+          <option value="none">None</option>
+          <option value="border">Thin</option>
+          <option value="border-2">Thick</option>
+        </select>
+      </div>
     </div>
   );
 }
